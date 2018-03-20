@@ -1,0 +1,15 @@
+{
+  "name": "react-isomorphic",
+  "version": "0.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/zblongfei/react-isomorphic.git",
+  "author": "zblongfei <zblongfei@gmail.com>",
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
+  }
+}
