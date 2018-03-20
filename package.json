@@ -4,12 +4,31 @@
   "main": "index.js",
   "repository": "https://github.com/zblongfei/react-isomorphic.git",
   "author": "zblongfei <zblongfei@gmail.com>",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development ts-node ./server/server.ts"
+  },
   "dependencies": {
+    "bootstrap": "^4.0.0",
+    "express": "^4.16.3",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
+    "@types/express": "^4.11.1",
+    "@types/node": "^9.4.7",
+    "@types/react": "^16.0.40",
+    "@types/react-dom": "^16.0.4",
+    "@types/react-router-dom": "^4.2.5",
+    "cross-env": "^5.1.4",
+    "html-webpack-plugin": "^3.0.7",
+    "ts-loader": "^4.1.0",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.7.2",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-middleware": "^3.0.1",
+    "webpack-hot-middleware": "^2.21.2",
+    "webpack-merge": "^4.1.2"
   }
 }
