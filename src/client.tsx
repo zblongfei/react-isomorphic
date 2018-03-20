@@ -1,4 +1,13 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 
-ReactDOM.render(<div>Hello World!</div>, document.querySelector('#app'))
+import App from './containers/App'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.querySelector('#app')
+)

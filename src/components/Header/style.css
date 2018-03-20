@@ -1,0 +1,11 @@
+.Nav {
+  padding: 0;
+}
+
+.Nav li {
+  display: inline-block;
+}
+
+.Nav li:not(:last-child) {
+  margin-right: 10px;
+}
