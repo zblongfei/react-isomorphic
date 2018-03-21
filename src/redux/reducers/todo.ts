@@ -38,6 +38,7 @@ export default handleActions<ITodoStore, ITodoParam>(
         draft.todos.push(action.payload.todo)
       })
     },
+
     [TOGGLE_TODO](state, action) {
       return produce(state, draft => {
         const { todos } = draft
@@ -45,6 +46,7 @@ export default handleActions<ITodoStore, ITodoParam>(
         todos[index].isDone = !todos[index].isDone
       })
     },
+
     [DELETE_TODO](state, action) {
       return produce(state, draft => {
         const index = draft.todos.findIndex(
@@ -53,17 +55,20 @@ export default handleActions<ITodoStore, ITodoParam>(
         draft.todos.splice(index, 1)
       })
     },
+
     [GET_TODOS_REQUEST](state, action) {
       return produce(state, draft => {
         draft.isFetching = true
       })
     },
+
     [GET_TODOS_SUCCESS](state, action) {
       return produce(state, draft => {
         draft.isFetching = false
         draft.todos = action.payload.todos
       })
     },
+
     [GET_TODOS_FAILED](state, action) {
       return produce(state, draft => {
         draft.isFetching = false
