@@ -1,7 +1,13 @@
 import * as express from 'express'
 
+import mock from './mock'
+
 const app = express()
 const isProduction = process.env.NODE_ENV === 'production'
+
+mock(app)
+
+app.use(require('connect-history-api-fallback')())
 
 if (!isProduction) {
   const config = require('../config/webpack.dev')
@@ -15,6 +21,8 @@ if (!isProduction) {
   app.use(webpackDevMiddleware)
   app.use(require('webpack-hot-middleware')(compiler))
 }
+
+app.use(require('connect-history-api-fallback')())
 
 const PORT = process.env.PORT || 3000
 

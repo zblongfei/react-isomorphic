@@ -1,0 +1,8 @@
+.list-group {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.done {
+  text-decoration: line-through !important;
+}

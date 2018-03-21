@@ -13,6 +13,9 @@ export const Header = () => {
         <li>
           <Link to="/about">About</Link>
         </li>
+        <li>
+          <Link to="/todo">todo</Link>
+        </li>
       </ul>
     </>
   )
