@@ -1,5 +1,5 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = {
   entry: './src/client.tsx',
@@ -30,10 +30,5 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'public/index.html'
-    })
-  ]
+  plugins: [new ManifestPlugin({ fileName: '../manifest.json' })]
 }

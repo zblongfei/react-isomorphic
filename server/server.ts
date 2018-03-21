@@ -1,13 +1,21 @@
+if (process.env.NODE_ENV === 'development') {
+  // css hook
+  require('css-modules-require-hook')({
+    generateScopedName: '[name]__[local]___[hash:base64:5]',
+    extensions: ['.css']
+  })
+}
+
 import * as express from 'express'
+import * as path from 'path'
 
 import mock from './mock'
+import render from './render'
 
 const app = express()
 const isProduction = process.env.NODE_ENV === 'production'
 
 mock(app)
-
-app.use(require('connect-history-api-fallback')())
 
 if (!isProduction) {
   const config = require('../config/webpack.dev')
@@ -18,11 +26,24 @@ if (!isProduction) {
     publicPath: config.output.publicPath
   })
 
+  // on development env
+  const getManifest = (webpackDevMiddleware: any) => {
+    const content = webpackDevMiddleware.fileSystem.readFileSync(
+      path.resolve(__dirname, '../dist/manifest.json')
+    )
+    return JSON.parse(content)
+  }
+
   app.use(webpackDevMiddleware)
   app.use(require('webpack-hot-middleware')(compiler))
+  app.use('*', (req, res) => {
+    return render(req, res, getManifest(webpackDevMiddleware))
+  })
+} else {
+  app.use('*', (res, rep) => {
+    return render(res, rep, require('../dist/manifest.json'))
+  })
 }
-
-app.use(require('connect-history-api-fallback')())
 
 const PORT = process.env.PORT || 3000
 

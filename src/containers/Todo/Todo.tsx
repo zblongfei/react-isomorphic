@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { connect, Dispatch } from 'react-redux'
+import { connect, Dispatch, Store } from 'react-redux'
 
 import TodoList from './TodoList'
 import { ITodo } from '../../common/models/todo'
@@ -83,6 +83,11 @@ class Todo extends React.Component<ITodoProps, ITodoState> {
       </>
     )
   }
+}
+
+// ssr load data
+export const loadData = (store: Store<{}>) => {
+  return store.dispatch(getTodos())
 }
 
 const mapStateToProps = (state: { todo: ITodoStore }) => ({ ...state.todo })
