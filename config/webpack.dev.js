@@ -4,7 +4,7 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = {
   entry: {
-    app: [
+    main: [
       'webpack-hot-middleware/client?noInfo=true&reload=true',
       './src/client.tsx'
     ]

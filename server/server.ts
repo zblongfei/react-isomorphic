@@ -15,6 +15,14 @@ import render from './render'
 const app = express()
 const isProduction = process.env.NODE_ENV === 'production'
 
+// favicon.ico
+const faviconPath = `${isProduction ? '../dist' : '../public'}/favicon.ico`
+app.use(require('serve-favicon')(path.resolve(__dirname, faviconPath)))
+
+// static
+app.use(express.static(path.resolve(__dirname, '../dist/public')))
+
+// mock data
 mock(app)
 
 if (!isProduction) {

@@ -9,9 +9,9 @@ import routes from '../src/routes'
 import configureStore from '../src/store'
 
 // manifest.json styles
-const styles = ['common.css', 'app.css']
+const styles = ['common.css', 'main.css']
 // manifest.json scripts
-const scripts = ['runtime.js', 'common.js', 'app.js']
+const scripts = ['runtime.js', 'common.js', 'main.js']
 
 interface HtmlProps {
   initState: Object
