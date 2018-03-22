@@ -1,17 +1,14 @@
 const path = require('path')
 const webpack = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-  entry: {
-    app: [
-      'webpack-hot-middleware/client?noInfo=true&reload=true',
-      './src/client.tsx'
-    ]
-  },
+  entry: './src/client.tsx',
 
   output: {
-    filename: '[name].js',
+    filename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[name].[chunkhash:8].js',
     path: path.resolve(__dirname, '../dist/public'),
     publicPath: '/'
   },
@@ -20,9 +17,9 @@ module.exports = {
     extensions: ['.js', '.ts', '.tsx', '.json']
   },
 
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
 
-  mode: 'development',
+  mode: 'production',
 
   module: {
     rules: [
@@ -33,7 +30,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader']
+        })
       },
       {
         test: /\.(png|jpg|gif|webp)$/,
@@ -44,6 +44,16 @@ module.exports = {
         use: ['file-loader?name=fonts/[hash].[ext]']
       }
     ]
+  },
+
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: 'common'
+    },
+    runtimeChunk: {
+      name: 'runtime'
+    }
   },
 
   plugins: [
@@ -58,6 +68,6 @@ module.exports = {
       }
     }),
     new ManifestPlugin({ fileName: '../manifest.json' }),
-    new webpack.HotModuleReplacementPlugin()
+    new ExtractTextPlugin('css/[name].[contenthash:8].css')
   ]
 }
