@@ -36,6 +36,15 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]',
+          'postcss-loader',
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.(png|jpg|gif|webp)$/,
         use: ['url-loader?limit=1000&name=images/[hash].[ext]']
       },

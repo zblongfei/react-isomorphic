@@ -36,6 +36,17 @@ module.exports = {
         })
       },
       {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]',
+            'postcss-loader',
+            'scss-loader'
+          ]
+        })
+      },
+      {
         test: /\.(png|jpg|gif|webp)$/,
         use: ['url-loader?limit=1000&name=images/[hash].[ext]']
       },
