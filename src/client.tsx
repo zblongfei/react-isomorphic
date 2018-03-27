@@ -7,7 +7,7 @@ import App from './containers/App'
 import configureStore from './store'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-const state = (window as any).__INITIAL_STATE__ || {}
+const state = window.__INITIAL_STATE__ || {}
 
 ReactDOM.render(
   <Provider store={configureStore(state)}>
