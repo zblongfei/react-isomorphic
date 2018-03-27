@@ -42,7 +42,7 @@ module.exports = {
           use: [
             'css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]',
             'postcss-loader',
-            'scss-loader'
+            'sass-loader'
           ]
         })
       },
