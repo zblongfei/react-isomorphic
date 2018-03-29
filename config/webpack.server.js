@@ -45,7 +45,6 @@ module.exports = {
         use: ['ts-loader'],
         exclude: ['node_modules']
       },
-      // Server Side Rendering  使用 isomorphic-style-loader 代替 style-loader
       {
         test: /\.css$/,
         use: ['isomorphic-style-loader', 'css-loader', 'postcss-loader']
