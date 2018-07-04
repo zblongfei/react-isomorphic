@@ -37,12 +37,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]',
-          'postcss-loader',
-          'sass-loader'
-        ]
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
       },
       {
         test: /\.(png|jpg|gif|webp)$/,

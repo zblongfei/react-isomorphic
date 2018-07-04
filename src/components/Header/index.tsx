@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-const style = require('./style.scss')
+import './style.scss'
 
 export const Header = () => {
   return (
     <>
-      <ul className={style.Nav}>
+      <ul className="Nav">
         <li>
           <Link to="/">Home</Link>
         </li>

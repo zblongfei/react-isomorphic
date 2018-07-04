@@ -53,7 +53,7 @@ module.exports = {
         test: /\.scss$/,
         use: [
           'isomorphic-style-loader',
-          'css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]',
+          'css-loader',
           'postcss-loader',
           'sass-loader'
         ]

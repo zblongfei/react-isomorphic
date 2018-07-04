@@ -5,7 +5,8 @@ import TodoList from './TodoList'
 import { ITodo } from '../../common/models/todo'
 import { addTodo, getTodos } from '../../redux/actions/todo'
 import { ITodoStore } from '../../redux/reducers/todo'
-import './style.css'
+
+import './style.scss'
 
 export interface ITodoProps {
   dispatch: Dispatch<{}>

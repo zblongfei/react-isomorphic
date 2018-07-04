@@ -6,11 +6,11 @@ import About from '../About'
 import Home from '../Home'
 import Todo from '../Todo'
 
-const style = require('./style.scss')
+import './style.scss'
 
 const App = () => {
   return (
-    <section className={style.AppContainer}>
+    <section className="AppContainer">
       <Header />
       <Switch>
         <Route path="/" component={Home} exact />

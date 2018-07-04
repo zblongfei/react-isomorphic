@@ -39,11 +39,7 @@ module.exports = {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: [
-            'css-loader?modules&importLoaders=2&localIdentName=[local]___[hash:base64:5]',
-            'postcss-loader',
-            'sass-loader'
-          ]
+          use: ['css-loader', 'postcss-loader', 'sass-loader']
         })
       },
       {

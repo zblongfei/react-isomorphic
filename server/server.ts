@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV === 'development') {
   // css hook
   require('css-modules-require-hook')({
-    generateScopedName: '[local]___[hash:base64:5]',
+    generateScopedName: '',
     extensions: ['.css', '.scss']
   })
 }
