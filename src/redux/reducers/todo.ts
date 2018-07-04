@@ -1,15 +1,14 @@
-import { handleActions } from 'redux-actions'
 import produce from 'immer'
-import { Action } from 'redux'
+import { handleActions } from 'redux-actions'
 
 import { ITodo } from '../../common/models/todo'
 import {
   ADD_TODO,
   DELETE_TODO,
-  TOGGLE_TODO,
+  GET_TODOS_FAILED,
   GET_TODOS_REQUEST,
   GET_TODOS_SUCCESS,
-  GET_TODOS_FAILED,
+  TOGGLE_TODO,
 } from '../actions/todo'
 
 export interface ITodoStore {
@@ -26,9 +25,9 @@ export interface ITodoParam {
 }
 
 const initialState: ITodoStore = {
+  error: null,
   isFetching: false,
   todos: [],
-  error: null,
 }
 
 export default handleActions<ITodoStore, ITodoParam>(
@@ -50,7 +49,7 @@ export default handleActions<ITodoStore, ITodoParam>(
     [DELETE_TODO](state, action) {
       return produce(state, (draft) => {
         const index = draft.todos.findIndex(
-          (todo) => todo.id === action.payload.id
+          (todo) => todo.id === action.payload.id,
         )
         draft.todos.splice(index, 1)
       })
@@ -76,5 +75,5 @@ export default handleActions<ITodoStore, ITodoParam>(
       })
     },
   },
-  initialState
+  initialState,
 )

@@ -1,9 +1,9 @@
-import { createStore, compose, applyMiddleware, Middleware } from 'redux'
-import thunk from 'redux-thunk'
+import { applyMiddleware, compose, createStore, Middleware } from 'redux'
 import logger from 'redux-logger'
+import thunk from 'redux-thunk'
 
-import reducers from './redux/reducers'
 import { isClient } from './common/js/utils'
+import reducers from './redux/reducers'
 
 const middlewares: Middleware[] = [thunk]
 
@@ -18,11 +18,11 @@ if (process.env.NODE_ENV === 'development' && isClient()) {
   }
 }
 
-const configureStore = (initState: Object = {}) => {
+const configureStore = (initState: object = {}) => {
   return createStore(
     reducers,
     initState,
-    composeEnhancers(applyMiddleware(...middlewares))
+    composeEnhancers(applyMiddleware(...middlewares)),
   )
 }
 

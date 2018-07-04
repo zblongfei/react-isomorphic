@@ -1,8 +1,8 @@
 if (process.env.NODE_ENV === 'development') {
   // css hook
   require('css-modules-require-hook')({
-    generateScopedName: '',
     extensions: ['.css', '.scss'],
+    generateScopedName: '',
   })
 }
 
@@ -35,9 +35,9 @@ if (!isProduction) {
   })
 
   // on development env
-  const getManifest = (webpackDevMiddleware: any) => {
-    const content = webpackDevMiddleware.fileSystem.readFileSync(
-      path.resolve(__dirname, '../dist/manifest.json')
+  const getManifest = (devMiddleware: any) => {
+    const content = devMiddleware.fileSystem.readFileSync(
+      path.resolve(__dirname, '../dist/manifest.json'),
     )
     return JSON.parse(content)
   }

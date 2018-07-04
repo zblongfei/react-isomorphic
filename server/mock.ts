@@ -10,7 +10,7 @@ export default (app: express.Express) => {
           { id: 1, isDone: true, value: 'one' },
           { id: 2, isDone: true, value: 'todos' },
         ],
-      })
+      }),
     )
   })
 }

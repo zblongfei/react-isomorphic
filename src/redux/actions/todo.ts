@@ -1,5 +1,6 @@
-import { createAction } from 'redux-actions'
 import { Dispatch } from 'react-redux'
+import { createAction } from 'redux-actions'
+
 import api from '../../api'
 import { ITodo } from '../../common/models/todo'
 
@@ -25,12 +26,12 @@ export const getTodosRequest = createAction(GET_TODOS_REQUEST)
 
 export const getTodosSuccess = createAction(
   GET_TODOS_SUCCESS,
-  (todos: ITodo[]) => ({ todos })
+  (todos: ITodo[]) => ({ todos }),
 )
 
 export const getTodosFailed = createAction(
   GET_TODOS_FAILED,
-  (error: Error) => ({ error })
+  (error: Error) => ({ error }),
 )
 
 export const getTodos = () => {

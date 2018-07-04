@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { connect, Dispatch, Store } from 'react-redux'
 
-import TodoList from './TodoList'
 import { ITodo } from '../../common/models/todo'
 import { addTodo, getTodos } from '../../redux/actions/todo'
 import { ITodoStore } from '../../redux/reducers/todo'
+import TodoList from './TodoList'
 
 import './style.scss'
 
@@ -29,14 +29,14 @@ class Todo extends React.Component<ITodoProps, ITodoState> {
     }
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     const { todos, dispatch } = this.props
     if (todos.length === 0) {
       dispatch(getTodos())
     }
   }
 
-  componentWillReceiveProps(nextProps: ITodoProps) {
+  public componentWillReceiveProps(nextProps: ITodoProps) {
     if (nextProps.todos.length > 0) {
       this.setState({
         id: Math.max(...nextProps.todos.map((todo) => todo.id)) + 1,
@@ -44,13 +44,13 @@ class Todo extends React.Component<ITodoProps, ITodoState> {
     }
   }
 
-  handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  public handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       value: e.target.value,
     })
   }
 
-  handleOnInputKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  public handleOnInputKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 13) {
       const { value, id } = this.state
       if (value) {
@@ -58,15 +58,15 @@ class Todo extends React.Component<ITodoProps, ITodoState> {
           addTodo({
             id,
             isDone: false,
-            value: value,
-          })
+            value,
+          }),
         )
         this.setState({ value: '', id: id + 1 })
       }
     }
   }
 
-  render() {
+  public render() {
     return (
       <>
         <div>

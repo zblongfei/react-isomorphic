@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect, Dispatch } from 'react-redux'
 
 import { ITodo } from '../../common/models/todo'
-import { toggleTodo, deleteTodo } from '../../redux/actions/todo'
+import { deleteTodo, toggleTodo } from '../../redux/actions/todo'
 
 export interface ITodoListProps {
   dispatch: Dispatch<{}>
@@ -10,7 +10,7 @@ export interface ITodoListProps {
 }
 
 class TodoList extends React.Component<ITodoListProps> {
-  toggleTodo = (event: React.MouseEvent<HTMLLIElement>) => {
+  public toggleTodo = (event: React.MouseEvent<HTMLLIElement>) => {
     const $todoItem = event.target as HTMLLIElement
     if ($todoItem && $todoItem.matches('li')) {
       const id = $todoItem.dataset.id
@@ -20,25 +20,23 @@ class TodoList extends React.Component<ITodoListProps> {
     }
   }
 
-  deleteTodo = (todo: ITodo) => {
+  public deleteTodo = (todo: ITodo) => {
     this.props.dispatch(deleteTodo(todo.id))
   }
 
-  render() {
-    return (
-      <ul className="list-group">
-        {this.props.todos.map((todo) => (
-          <li
-            key={todo.id}
-            data-id={todo.id}
-            className={`list-group-item ${todo.isDone ? 'done' : ''}`}
-            onClick={this.toggleTodo}
-          >
-            {todo.value}
-          </li>
-        ))}
-      </ul>
-    )
+  public render() {
+    const todos = this.props.todos.map((todo) => (
+      <li
+        key={todo.id}
+        data-id={todo.id}
+        className={`list-group-item ${todo.isDone ? 'done' : ''}`}
+        onClick={this.toggleTodo}
+      >
+        {todo.value}
+      </li>
+    ))
+
+    return <ul className="list-group">{todos}</ul>
   }
 }
 

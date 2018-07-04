@@ -13,9 +13,9 @@ const App = () => {
     <section className="AppContainer">
       <Header />
       <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/about" expect component={About} />
-        <Route path="/todo" expect component={Todo} />
+        <Route path="/" component={Home} exact={true} />
+        <Route path="/about" expect={true} component={About} />
+        <Route path="/todo" expect={true} component={Todo} />
       </Switch>
     </section>
   )

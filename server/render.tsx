@@ -1,8 +1,8 @@
 import * as express from 'express'
 import * as React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import { matchPath, StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { matchPath, StaticRouter } from 'react-router-dom'
 
 import App from '../src/containers/App'
 import routes from '../src/routes'
@@ -13,26 +13,38 @@ const styles = ['common.css', 'main.css']
 // manifest.json scripts
 const scripts = ['runtime.js', 'common.js', 'main.js']
 
-interface HtmlProps {
-  initState: Object
+interface IHtmlProps {
+  initState: object
   manifest: { [key in string]: string }
 }
 
-class Html extends React.Component<HtmlProps> {
-  safeJSONstringify = (obj: Object) => {
+class Html extends React.Component<IHtmlProps> {
+  public safeJSONstringify = (obj: object) => {
     return JSON.stringify(obj)
       .replace(/<\/script/g, '<\\/script')
       .replace(/<!--/g, '<\\!--')
   }
 
-  resolve = (files: string[]) => {
+  public resolve = (files: string[]) => {
     const { manifest } = this.props
     return files
       .map((src) => (!!manifest[src] ? manifest[src] : null))
       .filter((file) => !!file)
   }
 
-  render() {
+  public toStyleTags = () => {
+    return this.resolve(styles).map((src) => (
+      <link rel="stylesheet" key={src} href={src} />
+    ))
+  }
+
+  public toScriptContent = () => {
+    return `window.__INITIAL_STATE__=${this.safeJSONstringify(
+      this.props.initState,
+    )}`
+  }
+
+  public render() {
     return (
       <html lang="en">
         <head>
@@ -45,20 +57,14 @@ class Html extends React.Component<HtmlProps> {
           <link rel="shortcut icon" href="/favicon.ico" />
           <title>React App</title>
           {/* init styles*/}
-          {this.resolve(styles).map((src) => (
-            <link rel="stylesheet" key={src} href={src} />
-          ))}
+          {this.toStyleTags()}
         </head>
         <body>
           <noscript>You need to enable JavaScript to run this app.</noscript>
           <div id="app">{this.props.children}</div>
           {/* init state */}
           <script
-            dangerouslySetInnerHTML={{
-              __html: `window.__INITIAL_STATE__=${this.safeJSONstringify(
-                this.props.initState
-              )}`,
-            }}
+            dangerouslySetInnerHTML={{ __html: this.toScriptContent() }}
           />
           {/* init scripts */}
           {this.resolve(scripts).map((src) => <script key={src} src={src} />)}
@@ -71,7 +77,7 @@ class Html extends React.Component<HtmlProps> {
 const render = (req: express.Request, res: express.Response, manifest: any) => {
   // get init state
   const store = configureStore()
-  const promises: Promise<any>[] = []
+  const promises: Array<Promise<any>> = []
   routes.some((route) => {
     const match = matchPath(req.baseUrl, route)
     if (match && route.loadData) {
@@ -88,7 +94,7 @@ const render = (req: express.Request, res: express.Response, manifest: any) => {
             <App />
           </StaticRouter>
         </Provider>
-      </Html>
+      </Html>,
     )
     return res.status(200).send(`<!DOCTYPE html> ${html}`)
   })

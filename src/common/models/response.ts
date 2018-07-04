@@ -1,4 +1,4 @@
-export interface HttpResponse<T> {
+export interface IHttpResponse<T> {
   code: number
   data: T
 }

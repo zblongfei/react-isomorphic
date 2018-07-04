@@ -11,7 +11,7 @@ module.exports = merge(config, {
     filename: 'js/[name].[chunkhash:8].js',
     chunkFilename: 'js/[name].[chunkhash:8].js',
     path: path.resolve(__dirname, '../dist/public'),
-    publicPath: '/'
+    publicPath: '/',
   },
 
   devtool: 'source-map',
@@ -24,28 +24,28 @@ module.exports = merge(config, {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader']
-        })
+          use: ['css-loader', 'postcss-loader'],
+        }),
       },
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader', 'sass-loader']
-        })
-      }
-    ]
+          use: ['css-loader', 'postcss-loader', 'sass-loader'],
+        }),
+      },
+    ],
   },
 
   optimization: {
     splitChunks: {
       chunks: 'all',
-      name: 'common'
+      name: 'common',
     },
     runtimeChunk: {
-      name: 'runtime'
-    }
+      name: 'runtime',
+    },
   },
 
-  plugins: [new ExtractTextPlugin('css/[name].[contenthash:8].css')]
+  plugins: [new ExtractTextPlugin('css/[name].[contenthash:8].css')],
 })

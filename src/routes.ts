@@ -1,6 +1,6 @@
+import About from './containers/About'
 import App from './containers/App'
 import Home from './containers/Home'
-import About from './containers/About'
 import Todo, { loadData } from './containers/Todo'
 
 const routes = [

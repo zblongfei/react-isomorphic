@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const getExternals = () => {
   return fs
     .readdirSync(path.resolve(__dirname, '../node_modules'))
-    .filter(filename => !filename.includes('.bin'))
+    .filter((filename) => !filename.includes('.bin'))
     .reduce((externals, filename) => {
       externals[filename] = `commonjs ${filename}`
       return externals
@@ -14,17 +14,17 @@ const getExternals = () => {
 
 module.exports = {
   entry: {
-    server: './server/server.ts'
+    app: './server/app.ts',
   },
 
   output: {
     filename: '../[name].js',
     path: path.resolve(__dirname, '../dist/public'),
-    publicPath: '/'
+    publicPath: '/',
   },
 
   resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.json']
+    extensions: ['.js', '.ts', '.tsx', '.json'],
   },
 
   externals: getExternals(),
@@ -35,7 +35,7 @@ module.exports = {
 
   node: {
     __filename: true,
-    __dirname: true
+    __dirname: true,
   },
 
   module: {
@@ -43,11 +43,11 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         use: ['ts-loader'],
-        exclude: ['node_modules']
+        exclude: ['node_modules'],
       },
       {
         test: /\.css$/,
-        use: ['isomorphic-style-loader', 'css-loader', 'postcss-loader']
+        use: ['isomorphic-style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.scss$/,
@@ -55,18 +55,18 @@ module.exports = {
           'isomorphic-style-loader',
           'css-loader',
           'postcss-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.(png|jpg|gif|webp)$/,
-        use: ['url-loader?limit=1000&name=images/[hash].[ext]']
+        use: ['url-loader?limit=1000&name=images/[hash].[ext]'],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-        use: ['file-loader?name=fonts/[hash].[ext]']
-      }
-    ]
+        use: ['file-loader?name=fonts/[hash].[ext]'],
+      },
+    ],
   },
 
   plugins: [
@@ -75,20 +75,20 @@ module.exports = {
         postcss: {
           sourceMap: true,
           config: {
-            path: 'postcss.config.js'
-          }
+            path: 'postcss.config.js',
+          },
         },
         sass: {
-          sourceMap: true
-        }
-      }
-    })
+          sourceMap: true,
+        },
+      },
+    }),
   ],
 
   // 不启用压缩
   optimization: {
-    minimize: false
-  }
+    minimize: false,
+  },
 }
 
 const copyFile = (source, target) => {

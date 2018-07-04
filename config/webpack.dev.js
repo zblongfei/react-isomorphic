@@ -9,8 +9,8 @@ module.exports = merge(config, {
   entry: {
     main: [
       'webpack-hot-middleware/client?noInfo=true&reload=true',
-      './src/client.tsx'
-    ]
+      './src/client.tsx',
+    ],
   },
 
   devtool: 'inline-source-map',
@@ -21,14 +21,14 @@ module.exports = merge(config, {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+      },
+    ],
   },
 
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 })
