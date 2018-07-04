@@ -2,19 +2,16 @@ const path = require('path')
 const webpack = require('webpack')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const merge = require('webpack-merge')
 
-module.exports = {
-  entry: './src/client.tsx',
+const config = require('./webpack.conf')
 
+module.exports = merge(config, {
   output: {
     filename: 'js/[name].[chunkhash:8].js',
     chunkFilename: 'js/[name].[chunkhash:8].js',
     path: path.resolve(__dirname, '../dist/public'),
     publicPath: '/'
-  },
-
-  resolve: {
-    extensions: ['.js', '.ts', '.tsx', '.json']
   },
 
   devtool: 'source-map',
@@ -23,11 +20,6 @@ module.exports = {
 
   module: {
     rules: [
-      {
-        test: /\.(tsx|ts)$/,
-        use: ['babel-loader', 'ts-loader'],
-        exclude: ['node_modules']
-      },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
@@ -41,14 +33,6 @@ module.exports = {
           fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader', 'sass-loader']
         })
-      },
-      {
-        test: /\.(png|jpg|gif|webp)$/,
-        use: ['url-loader?limit=1000&name=images/[hash].[ext]']
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-        use: ['file-loader?name=fonts/[hash].[ext]']
       }
     ]
   },
@@ -63,18 +47,5 @@ module.exports = {
     }
   },
 
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: {
-          sourceMap: true,
-          config: {
-            path: 'postcss.config.js'
-          }
-        }
-      }
-    }),
-    new ManifestPlugin({ fileName: '../manifest.json' }),
-    new ExtractTextPlugin('css/[name].[contenthash:8].css')
-  ]
-}
+  plugins: [new ExtractTextPlugin('css/[name].[contenthash:8].css')]
+})

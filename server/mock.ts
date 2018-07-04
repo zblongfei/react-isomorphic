@@ -8,8 +8,8 @@ export default (app: express.Express) => {
         code: 200,
         data: [
           { id: 1, isDone: true, value: 'one' },
-          { id: 2, isDone: true, value: 'todos' }
-        ]
+          { id: 2, isDone: true, value: 'todos' },
+        ],
       })
     )
   })

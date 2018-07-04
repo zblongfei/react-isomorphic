@@ -2,7 +2,7 @@ if (process.env.NODE_ENV === 'development') {
   // css hook
   require('css-modules-require-hook')({
     generateScopedName: '',
-    extensions: ['.css', '.scss']
+    extensions: ['.css', '.scss'],
   })
 }
 
@@ -31,7 +31,7 @@ if (!isProduction) {
 
   const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
     logLevel: 'warn',
-    publicPath: config.output.publicPath
+    publicPath: config.output.publicPath,
   })
 
   // on development env

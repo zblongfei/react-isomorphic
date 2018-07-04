@@ -28,8 +28,8 @@ class Html extends React.Component<HtmlProps> {
   resolve = (files: string[]) => {
     const { manifest } = this.props
     return files
-      .map(src => (!!manifest[src] ? manifest[src] : null))
-      .filter(file => !!file)
+      .map((src) => (!!manifest[src] ? manifest[src] : null))
+      .filter((file) => !!file)
   }
 
   render() {
@@ -45,7 +45,7 @@ class Html extends React.Component<HtmlProps> {
           <link rel="shortcut icon" href="/favicon.ico" />
           <title>React App</title>
           {/* init styles*/}
-          {this.resolve(styles).map(src => (
+          {this.resolve(styles).map((src) => (
             <link rel="stylesheet" key={src} href={src} />
           ))}
         </head>
@@ -57,11 +57,11 @@ class Html extends React.Component<HtmlProps> {
             dangerouslySetInnerHTML={{
               __html: `window.__INITIAL_STATE__=${this.safeJSONstringify(
                 this.props.initState
-              )}`
+              )}`,
             }}
           />
           {/* init scripts */}
-          {this.resolve(scripts).map(src => <script key={src} src={src} />)}
+          {this.resolve(scripts).map((src) => <script key={src} src={src} />)}
         </body>
       </html>
     )
@@ -72,7 +72,7 @@ const render = (req: express.Request, res: express.Response, manifest: any) => {
   // get init state
   const store = configureStore()
   const promises: Promise<any>[] = []
-  routes.some(route => {
+  routes.some((route) => {
     const match = matchPath(req.baseUrl, route)
     if (match && route.loadData) {
       promises.push(route.loadData(store))

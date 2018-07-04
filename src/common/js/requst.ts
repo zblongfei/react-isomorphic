@@ -8,7 +8,7 @@ if (isClient()) {
 
 const requst = axios.create({
   baseURL,
-  timeout: 30000
+  timeout: 30000,
 })
 
 export default requst

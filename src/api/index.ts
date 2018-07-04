@@ -1,7 +1,7 @@
 import * as TodoApi from './todo'
 
 const api = {
-  ...TodoApi
+  ...TodoApi,
 }
 
 export default api

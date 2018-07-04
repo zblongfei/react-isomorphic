@@ -27,7 +27,7 @@ class TodoList extends React.Component<ITodoListProps> {
   render() {
     return (
       <ul className="list-group">
-        {this.props.todos.map(todo => (
+        {this.props.todos.map((todo) => (
           <li
             key={todo.id}
             data-id={todo.id}

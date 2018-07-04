@@ -25,7 +25,7 @@ class Todo extends React.Component<ITodoProps, ITodoState> {
     super(props)
     this.state = {
       id: 0,
-      value: ''
+      value: '',
     }
   }
 
@@ -39,14 +39,14 @@ class Todo extends React.Component<ITodoProps, ITodoState> {
   componentWillReceiveProps(nextProps: ITodoProps) {
     if (nextProps.todos.length > 0) {
       this.setState({
-        id: Math.max(...nextProps.todos.map(todo => todo.id)) + 1
+        id: Math.max(...nextProps.todos.map((todo) => todo.id)) + 1,
       })
     }
   }
 
   handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      value: e.target.value
+      value: e.target.value,
     })
   }
 
@@ -58,7 +58,7 @@ class Todo extends React.Component<ITodoProps, ITodoState> {
           addTodo({
             id,
             isDone: false,
-            value: value
+            value: value,
           })
         )
         this.setState({ value: '', id: id + 1 })

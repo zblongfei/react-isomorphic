@@ -10,13 +10,15 @@
     "build:server": "webpack --progress --config ./config/webpack.server.js",
     "build": "cross-env NODE_ENV=production npm run build:client && npm run build:server",
     "dev": "cross-env NODE_ENV=development ts-node ./server/server.ts",
-    "start": "cross-env NODE_ENV=production node ./dist/server.js"
+    "start": "cross-env NODE_ENV=production node ./dist/server.js",
+    "format": "prettier --write \"src/**/*.ts*\" \"server/**/*.ts*\""
   },
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
     "express": "^4.16.3",
     "immer": "^1.2.0",
+    "prettier": "^1.13.7",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
@@ -64,6 +66,7 @@
     "webpack-cli": "^2.0.12",
     "webpack-dev-middleware": "^3.0.1",
     "webpack-hot-middleware": "^2.21.2",
-    "webpack-manifest-plugin": "^2.0.0-rc.2"
+    "webpack-manifest-plugin": "^2.0.0-rc.2",
+    "webpack-merge": "^4.1.3"
   }
 }

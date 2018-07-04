@@ -7,7 +7,7 @@ const routes = [
   { path: '/', component: App, exact: true },
   { path: '/home', component: Home },
   { path: '/about', component: About },
-  { path: '/todo', component: Todo, loadData }
+  { path: '/todo', component: Todo, loadData },
 ]
 
 export default routes

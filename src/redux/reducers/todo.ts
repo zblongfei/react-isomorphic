@@ -9,7 +9,7 @@ import {
   TOGGLE_TODO,
   GET_TODOS_REQUEST,
   GET_TODOS_SUCCESS,
-  GET_TODOS_FAILED
+  GET_TODOS_FAILED,
 } from '../actions/todo'
 
 export interface ITodoStore {
@@ -28,53 +28,53 @@ export interface ITodoParam {
 const initialState: ITodoStore = {
   isFetching: false,
   todos: [],
-  error: null
+  error: null,
 }
 
 export default handleActions<ITodoStore, ITodoParam>(
   {
     [ADD_TODO](state, action) {
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.todos.push(action.payload.todo)
       })
     },
 
     [TOGGLE_TODO](state, action) {
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         const { todos } = draft
-        const index = todos.findIndex(todo => todo.id === action.payload.id)
+        const index = todos.findIndex((todo) => todo.id === action.payload.id)
         todos[index].isDone = !todos[index].isDone
       })
     },
 
     [DELETE_TODO](state, action) {
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         const index = draft.todos.findIndex(
-          todo => todo.id === action.payload.id
+          (todo) => todo.id === action.payload.id
         )
         draft.todos.splice(index, 1)
       })
     },
 
     [GET_TODOS_REQUEST](state, action) {
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.isFetching = true
       })
     },
 
     [GET_TODOS_SUCCESS](state, action) {
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.isFetching = false
         draft.todos = action.payload.todos
       })
     },
 
     [GET_TODOS_FAILED](state, action) {
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.isFetching = false
         draft.error = action.payload.error
       })
-    }
+    },
   },
   initialState
 )
